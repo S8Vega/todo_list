@@ -21,3 +21,5 @@ CREATE TABLE IF NOT EXISTS notas(
     CONSTRAINT pk_notas PRIMARY KEY (id),
     CONSTRAINT fk_notas_usuarios FOREIGN KEY (usuarios_id) REFERENCES usuarios(id) 
 )ENGINE=InnoDb;
+
+ALTER TABLE `notas` ADD `realizada` TINYINT NOT NULL AFTER `fecha`;
