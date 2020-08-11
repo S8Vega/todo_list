@@ -1,6 +1,6 @@
+import usuarios.conexion as cnx
 import datetime
 import hashlib
-import usuarios.conexion as cnx
 
 cnc = cnx.conectar()
 database = cnc[0]
