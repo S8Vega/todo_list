@@ -12,3 +12,9 @@ class Accion:
             print(f"has guardado la nota: {titulo}")
         else:
             print(f"no se ha guardado la nota {usuario[1]}")
+    
+    def mostrar(self, usuario):
+        print(f"{usuario[1]} aqui tienes tus notas: ")
+        nota = modelo.Nota(usuario[0])
+        notas = nota.listar()
+        print(notas)
