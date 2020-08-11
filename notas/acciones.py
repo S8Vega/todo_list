@@ -17,4 +17,17 @@ class Accion:
         print(f"{usuario[1]} aqui tienes tus notas: ")
         nota = modelo.Nota(usuario[0])
         notas = nota.listar()
-        print(notas)
+        for nota in notas:
+            print("--------------------")
+            print(f"titulo: {nota[2]}")
+            print(nota[3])
+            print("--------------------\n")
+            
+    def borrar(self, usuario):
+        titulo = input(f"{usuario[1]} introduce el titulo de la nota a borrar: ")
+        nota = modelo.Nota(usuario[0], titulo)
+        eliminar = nota.eliminar()
+        if eliminar[0] >= 1:
+            print(f"hemos borrado la nota: {nota.titulo}")
+        else:
+            print("no se ha borrado la nota")
