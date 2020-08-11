@@ -9,10 +9,10 @@ class Nota:
         self.usuario_id = usuario_id
         self.titulo = titulo
         self.descripcion = descripcion
-        self.realizada = realizada
+        self.realizada = str(realizada)
     
     def guardar(self):
-        sql = "INSER INTO notas VALUES(null, %s, %s, %s, NOW(), %s"
+        sql = "INSERT INTO notas VALUES(null, %s, %s, %s, NOW(), %s)"
         nota = (self.usuario_id, self.titulo, self.descripcion, self.realizada)
         cursor.execute(sql, nota)
         database.commit()

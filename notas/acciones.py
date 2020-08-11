@@ -5,7 +5,7 @@ class Accion:
         print(f"{usuario[1]} vamos a crear una nueva nota")
         titulo = input("introduce el titulo de tu nota: ")
         descripcion = input("introduce la descripcion de tu nota: ")
-        nota = modelo.Nota(usuario[0], titulo, descripcion, False)
+        nota = modelo.Nota(usuario[0], titulo, descripcion, "0")
         guardar = nota.guardar()
 
         if guardar[0] >= 1:
