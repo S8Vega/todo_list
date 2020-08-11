@@ -21,3 +21,7 @@ class Acciones:
         print("identificate en el sistema: ")
         email = input("digita tu email: ")
         contrasena = input("digita tu contraseña: ")
+        usuario = modelo.Usuario("", "", email, contrasena)
+        login = usuario.identificar()
+        if email == login[3]:
+            print(f"bienvenido {login[1]}, te has registrado en el {login[5]}")

@@ -2,9 +2,9 @@ import datetime
 import hashlib
 import usuarios.conexion as cnx
 
-conexion = cnx.conectar()
-database = conexion[0]
-cursor = conexion[1]
+cnc = cnx.conectar()
+database = cnc[0]
+cursor = cnc[1]
 
 
 class Usuario:
@@ -29,4 +29,11 @@ class Usuario:
         return result
 
     def identificar(self):
-        return self.nombre
+        sql = "SELECT * FROM usuarios WHERE email = %s AND contrasena = %s"
+        cifrado = hashlib.sha256()
+        cifrado.update(self.contrasena.encode("utf8"))
+        usuario = (self.email, cifrado.hexdigest())
+        cursor.execute(sql, usuario)
+        result = cursor.fetchone()
+        return result
+
