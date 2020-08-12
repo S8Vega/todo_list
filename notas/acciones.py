@@ -17,8 +17,12 @@ class Accion:
         print(f"{usuario[1]} aqui tienes tus notas: ")
         nota = modelo.Nota(usuario[0])
         notas = nota.listar()
+        if len(notas) == 0:
+            print("--------------------\n")
+            print(f"{usuario[1]} no tienes notas todavia")
+            print("--------------------\n")
         for nota in notas:
-            print("--------------------")
+            print("--------------------\n")
             print(f"titulo: {nota[2]}")
             print(nota[3])
             print("--------------------\n")

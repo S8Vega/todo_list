@@ -1,8 +1,8 @@
-import usuarios.conexion as cnx
+import conexion
 import datetime
 import hashlib
 
-cnc = cnx.conectar()
+cnc = conexion.conectar()
 database = cnc[0]
 cursor = cnc[1]
 
@@ -14,12 +14,15 @@ class Usuario:
         self.email = email
         self.contrasena = contrasena
 
-    def registrar(self):
-        fecha = datetime.datetime.now()
+    def cifrar(self):
         cifrado = hashlib.sha256()
         cifrado.update(self.contrasena.encode("utf8"))
+        return cifrado.hexdigest()
+
+    def registrar(self):
+        fecha = datetime.datetime.now()
         sql = "INSERT INTO usuarios VALUES(null, %s, %s, %s, %s, %s)"
-        usuario = (self.nombre, self.apellido, self.email, cifrado.hexdigest(), fecha)
+        usuario = (self.nombre, self.apellido, self.email, self.cifrar(), fecha)
         try:
             cursor.execute(sql, usuario)
             database.commit()
@@ -30,9 +33,7 @@ class Usuario:
 
     def identificar(self):
         sql = "SELECT * FROM usuarios WHERE email = %s AND contrasena = %s"
-        cifrado = hashlib.sha256()
-        cifrado.update(self.contrasena.encode("utf8"))
-        usuario = (self.email, cifrado.hexdigest())
+        usuario = (self.email, self.cifrar())
         cursor.execute(sql, usuario)
         result = cursor.fetchone()
         return result

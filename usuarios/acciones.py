@@ -29,7 +29,7 @@ class Acciones:
                 print(f"bienvenido {login[1]}, te has registrado en el {login[5]}")
                 self.proximasAcciones(login)
         except Exception as e:
-            print(e)
+            print("error: ", e)
             print("login incorrecto")
     
     def proximasAcciones(self, usuario):
@@ -58,5 +58,7 @@ class Acciones:
             print(f"hasta pronto {usuario[1]}")
             exit()
         else:
+            print("--------------------")
             print("accion invalida")
+            print("--------------------\n")
             self.proximasAcciones(usuario)

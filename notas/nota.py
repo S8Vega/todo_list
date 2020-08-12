@@ -1,4 +1,4 @@
-import usuarios.conexion as conexion
+import conexion
 
 connect = conexion.conectar()
 database = connect[0]
