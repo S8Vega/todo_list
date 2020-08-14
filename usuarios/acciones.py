@@ -33,6 +33,7 @@ class Acciones:
             print("login incorrecto")
     
     def proximasAcciones(self, usuario):
+        print("--------------------------------------------------")
         print("""
         acciones disponibles:
             - crear nota (crear)
@@ -62,3 +63,4 @@ class Acciones:
             print("accion invalida")
             print("--------------------\n")
             self.proximasAcciones(usuario)
+        print("--------------------------------------------------\n")

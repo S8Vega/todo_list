@@ -12,6 +12,11 @@ class Nota:
         self.realizada = str(realizada)
     
     def guardar(self):
+        sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '{self.titulo}'"
+        cursor.execute(sql)
+        if cursor.rowcount > 0:
+            print(f"la nota {self.titulo} ya esta registrada")
+            return [0, self]
         sql = "INSERT INTO notas VALUES(null, %s, %s, %s, NOW(), %s)"
         nota = (self.usuario_id, self.titulo, self.descripcion, self.realizada)
         cursor.execute(sql, nota)
@@ -25,6 +30,11 @@ class Nota:
         return result
 
     def eliminar(self):
+        sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
+        cursor.execute(sql)
+        if cursor.rowcount > 0:
+            print(f"el titulo {self.titulo} esta en varias notas, por favor se mas especifico")
+            return [0, self]
         sql = f"DELETE FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
         cursor.execute(sql)
         database.commit()
