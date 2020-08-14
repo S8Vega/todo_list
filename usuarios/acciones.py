@@ -38,6 +38,7 @@ class Acciones:
         acciones disponibles:
             - crear nota (crear)
             - mostrar tus notas (mostrar)
+            - marcar una nota como realizada (marcar)
             - eliminar nota (eliminar)
             - salir (salir)
         """)
@@ -50,6 +51,10 @@ class Acciones:
         elif accion == "mostrar":
             print("vamos a mostrar")
             hacer.mostrar(usuario)
+            self.proximasAcciones(usuario)
+        elif accion == "marcar":
+            print("vamos a marcar una nota")
+            hacer.marcar(usuario)
             self.proximasAcciones(usuario)
         elif accion == "eliminar":
             print("vamos a eliminar")

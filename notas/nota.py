@@ -24,7 +24,7 @@ class Nota:
         return [cursor.rowcount, self]
     
     def listar(self):
-        sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id}"
+        sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id} ORDER BY `realizada` ASC"
         cursor.execute(sql)
         result = cursor.fetchall()
         return result
@@ -32,10 +32,21 @@ class Nota:
     def eliminar(self):
         sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
         cursor.execute(sql)
-        if cursor.rowcount > 0:
+        if cursor.rowcount > 1:
             print(f"el titulo {self.titulo} esta en varias notas, por favor se mas especifico")
             return [0, self]
         sql = f"DELETE FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
+        cursor.execute(sql)
+        database.commit()
+        return [cursor.rowcount, self]
+    
+    def marcar(self):
+        sql = f"SELECT * FROM notas WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
+        cursor.execute(sql)
+        if cursor.rowcount > 1:
+            print(f"el titulo {self.titulo} esta en varias notas, por favor se mas especifico")
+            return [0, self]
+        sql = f"UPDATE notas SET realizada = '1' WHERE usuarios_id = {self.usuario_id} AND titulo LIKE '%{self.titulo}%'"
         cursor.execute(sql)
         database.commit()
         return [cursor.rowcount, self]

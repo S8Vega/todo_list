@@ -23,7 +23,8 @@ class Accion:
             print("--------------------\n")
         for nota in notas:
             print("--------------------\n")
-            print(f"titulo: {nota[2]}")
+            realizada ="NO" if nota[5] == 0 else "SI"
+            print(f"titulo: {nota[2]} realizada = {realizada}")
             print(nota[3])
             print("--------------------\n")
             
@@ -35,3 +36,12 @@ class Accion:
             print(f"hemos borrado la nota: {nota.titulo}")
         else:
             print("no se ha borrado la nota")
+
+    def marcar(self, usuario):
+        titulo = input(f"{usuario[1]} introduce el titulo de la nota a marcar: ")
+        nota = modelo.Nota(usuario[0], titulo)
+        marcada = nota.marcar()
+        if marcada[0] >= 1:
+            print(f"hemos marcado la nota: {nota.titulo}")
+        else:
+            print("no se ha marcado la nota")

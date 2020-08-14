@@ -22,7 +22,7 @@ class Usuario:
     def registrar(self):
         sql = f"SELECT * FROM usuarios WHERE email = '{self.email}'"
         cursor.execute(sql)
-        if cursor.rowcount > 0:
+        if cursor.rowcount > 1:
             print(f"el email {self.email} ya esta registrado")
             return [0, self]
         fecha = datetime.datetime.now()
