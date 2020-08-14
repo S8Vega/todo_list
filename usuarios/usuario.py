@@ -20,6 +20,11 @@ class Usuario:
         return cifrado.hexdigest()
 
     def registrar(self):
+        sql = f"SELECT * FROM usuarios WHERE email = '{self.email}'"
+        cursor.execute(sql)
+        if cursor.rowcount > 0:
+            print(f"el email {self.email} ya esta registrado")
+            return [0, self]
         fecha = datetime.datetime.now()
         sql = "INSERT INTO usuarios VALUES(null, %s, %s, %s, %s, %s)"
         usuario = (self.nombre, self.apellido, self.email, self.cifrar(), fecha)
